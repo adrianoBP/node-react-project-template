@@ -57,7 +57,7 @@ function App() {
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input type="text" ref={todoNameRef} />
       <button type="button" onClick={handleAddTodo}>
-        Add Todo
+        Add New Todo
       </button>
       <button type="button" onClick={handleClearTodos}>
         Clear Completed Todos
