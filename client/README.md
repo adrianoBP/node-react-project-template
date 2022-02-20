@@ -95,3 +95,47 @@ npm test
 
 - Folder: components must have a `__test__` folder
 - File: testing documents must follow the `CompName.test.jsx` format
+
+## Docker configuration (NOT REQUIRED)
+
+Docker file
+
+```text
+FROM node:16.13.0
+
+WORKDIR /app
+
+COPY package.json ./
+
+COPY package-lock.json ./
+
+COPY ./ ./
+
+RUN npm i
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
+
+```
+
+Build Docker image
+
+```shell
+docker build -t dockerusername/appName:1.0 .
+```
+
+Run Docker container
+
+```shell
+docker run dockerusername/appName:1.0
+```
+
+> Add `-p hostPort:containerPort` to enable port forwarding in the container  
+> NOTE: the port needs to be exposed in the Dockerfile!
+
+Stop container by name
+
+```shell
+docker stop $(docker ps -q --filter ancestor=dockerusername/appName:1.0 )
+```
