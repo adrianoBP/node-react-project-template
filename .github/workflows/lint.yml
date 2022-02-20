@@ -16,8 +16,9 @@ jobs:
         uses: actions/setup-node@v2.5.1
         with:
           node-version: 16
+      - name: Install
+        run: npm ci
       - name: Build
-      - run: npm ci
-      - run: npm run build
+        run: npm run build
       - name: Linter
         run: npx eslint "client/src/**"
