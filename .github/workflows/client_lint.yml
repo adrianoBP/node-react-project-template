@@ -1,4 +1,4 @@
-name: Linter
+name: Client Linter
 
 on:
   push:
@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 16
       - name: Install
-        run: npm ci
+        run: npm ci --prefix client/
       - name: Build
-        run: npm run build
+        run: npm run build --prefix client/
       - name: Linter
         run: npx eslint "client/src/**"
