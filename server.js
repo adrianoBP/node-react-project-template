@@ -12,9 +12,9 @@ const clientBuildPath = path.join(__dirname, './client/build')
 
 app.use(express.static(clientBuildPath));
 app.get('*', (_, res) => {
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
+  res.sendFile(path.join(clientBuildPath, 'index.html'));
 });
 
 app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+  console.log(`Listening on port ${PORT}`);
 });

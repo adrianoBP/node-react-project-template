@@ -1,12 +1,16 @@
-# Start the app
+# React
 
-```shell
-npm start
-```
+- [React](#react)
+  - [ESLint configuration](#eslint-configuration)
+  - [Testing](#testing)
+    - [Structure](#structure)
+  - [Run the application](#run-the-application)
+  - [Docker configuration (NOT REQUIRED)](#docker-configuration-not-required)
+  - [Workflows](#workflows)
+    - [Linting](#linting)
+    - [Continuous Integration](#continuous-integration)
 
-> Add `--prefix path/to/folder` to specify a path
-
-## ESLint
+## ESLint configuration
 
 Install ESLinter:
 
@@ -96,6 +100,14 @@ npm test
 - Folder: components must have a `__test__` folder
 - File: testing documents must follow the `CompName.test.jsx` format
 
+## Run the application
+
+```shell
+npm start
+```
+
+> Add `--prefix path/to/folder` to specify a path
+
 ## Docker configuration (NOT REQUIRED)
 
 Docker file
@@ -138,4 +150,64 @@ Stop container by name
 
 ```shell
 docker stop $(docker ps -q --filter ancestor=dockerusername/appName:1.0 )
+```
+
+## Workflows
+
+### Linting
+
+```yml
+name: Client Linter
+
+on:
+  push:
+    branches: [fake-branch]
+    paths:
+    - 'client/src/**'
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+      - name: Setup Node
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16
+      - name: Install
+        run: npm ci --prefix client/
+      - name: Build
+        run: CI= npm run build --prefix client/
+      - name: Linter
+        run: npx eslint "client/src/**"
+```
+
+### Continuous Integration
+
+```yml
+name: Client Tester
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+      - name: Setup Node
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16
+      - name: Install
+        run: npm ci --prefix client/
+      - name: Test
+        run: npm test a --prefix client/ -- --coverage
+      - name: Build
+        run: CI= npm run build --prefix client/
 ```
