@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Todo({ todo, toggleTodo }) {
   function handleTodoClick() {
-    toggleTodo(todo.not-id);
+    toggleTodo(todo.id);
   }
   return (
     <div id={todo.id}>
