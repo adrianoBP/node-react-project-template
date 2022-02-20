@@ -1,4 +1,4 @@
-name: Client Deploy
+name: Deploy
 
 on:
   workflow_dispatch:
@@ -15,7 +15,9 @@ jobs:
           password: ${{ secrets.ssh_password }}
           port: 22
           script: |
-            cd projects/node-react-project-template
-            git checkout deploy
+            cd /home/adriano/projects/node-react-project-template
+            systemctl stop node-react-project-template
+            git checkout master
             git pull
-            
+            npm run build --prefix client/
+            systemctl start node-react-project-template
