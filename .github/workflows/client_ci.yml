@@ -1,14 +1,12 @@
-name: Client Linter
+name: Client Tester
 
 on:
-  push:
-    branches: [fake-branch]
-    paths:
-    - 'client/src/**'
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,7 +17,7 @@ jobs:
           node-version: 16
       - name: Install
         run: npm ci --prefix client/
+      - name: Test
+        run: npm test a --prefix client/ -- --coverage
       - name: Build
         run: CI= npm run build --prefix client/
-      - name: Linter
-        run: npx eslint "client/src/**"

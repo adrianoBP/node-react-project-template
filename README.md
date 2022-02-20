@@ -6,7 +6,7 @@ Template project for React frontend application with NodeJS backend
 
 ### 1. Create React application
 
-```sh
+```shell
 npx create-react-app client
 ```
 
