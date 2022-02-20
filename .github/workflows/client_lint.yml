@@ -2,7 +2,7 @@ name: Client Linter
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
     - 'client/src/**'
   workflow_dispatch:
@@ -20,6 +20,6 @@ jobs:
       - name: Install
         run: npm ci --prefix client/
       - name: Build
-        run: npm run build --prefix client/
+        run: CI= npm run build --prefix client/
       - name: Linter
         run: npx eslint "client/src/**"
