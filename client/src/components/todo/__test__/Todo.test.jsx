@@ -23,5 +23,5 @@ test('Todo element render', () => {
 
   render(<Todo todo={todo} />);
   const todoElement = screen.getByText(/New TODO Element/i);
-  expect(todoElement.textContent).toBe('New TODO Element WRONG');
+  expect(todoElement.textContent).toBe('New TODO Element');
 });
