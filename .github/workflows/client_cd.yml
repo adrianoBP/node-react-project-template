@@ -1,0 +1,19 @@
+name: Client Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: t1.adrianobp.dev
+          username: adriano
+          password: ${{ secrets.ssh_password }}
+          port: 22
+          script: |
+            cd projects/node-react-project-template
+            whoami
