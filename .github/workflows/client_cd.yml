@@ -16,4 +16,6 @@ jobs:
           port: 22
           script: |
             cd projects/node-react-project-template
-            whoami
+            git checkout deploy
+            git pull
+            
