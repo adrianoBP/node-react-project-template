@@ -16,8 +16,8 @@ jobs:
           port: 22
           script: |
             cd /home/adriano/projects/node-react-project-template
-            systemctl stop node-react-project-template
+            systemctl stop node-react-template
             git checkout master
             git pull
             npm run build --prefix client/
-            systemctl start node-react-project-template
+            systemctl start node-react-template
