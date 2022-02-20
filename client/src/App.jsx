@@ -50,10 +50,6 @@ function App() {
   function handleClearTodos(e) {
     const newTodos = todos.filter((todo) => !todo.complete);
     setTodos(newTodos);
-    const test = 1;
-    test = 2;
-
-    const m = test + 4;
   }
 
   return (
