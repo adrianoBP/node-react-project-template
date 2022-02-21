@@ -6,6 +6,8 @@ Template project for React frontend application with NodeJS backend
   - [Repository](#repository)
     - [Folder Structure](#folder-structure)
     - [Branches](#branches)
+      - [Naming](#naming)
+      - [Branch structure](#branch-structure)
     - [Commit Messages](#commit-messages)
   - [Client (React)](#client-react)
     - [React configuration](#react-configuration)
@@ -57,8 +59,24 @@ Template project for React frontend application with NodeJS backend
 
 ### Branches
 
+#### Naming
+
 - `feat/be-33`: feature branch for backend card number 33
 - `fix/fe-12`: fix branch for frontend card 12
+
+#### Branch structure
+
+```text
+main
+├─ develop
+│  ├ feat
+│  └ fix
+└─ release
+```
+
+- `main`: main repository branch. All tests must be successful in this branch
+- `develop`: development branch - All features and fixes branches will be created from this branch. Can, but shouldn't, contain bugs.
+- `release`: **must** contain bug-free code. **All** tests must be successful. Code used by the deployed server.
 
 ### Commit Messages
 
@@ -316,7 +334,7 @@ jobs:
           script: |
             cd /path/to/your/project
             systemctl stop service-name
-            git checkout master
+            git checkout release
             git pull
             npm run build --prefix client/
             systemctl start service-name

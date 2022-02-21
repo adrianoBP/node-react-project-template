@@ -1,5 +1,4 @@
 // ! NodeJS unit testing
-// ! TLS
 
 // TODO: make API call to backend (CORS)
 // TODO: define PR structure including how to merge
