@@ -1,26 +1,35 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "jest": true
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+    "root": true,
+    "extends": [
+        "airbnb",
+        "prettier",
+        "plugin:prettier/recommended"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true
     },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "extends": [],
-  "rules": {
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "max-len": [
-      "warn",
-      130
-    ],
-    "no-unused-vars": "warn"
-  }
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto",
+                "singleQuote": true
+            }
+        ],
+        "max-len": [
+            "warn",
+            120
+        ],
+        "no-unused-vars": "warn"
+    }
 }

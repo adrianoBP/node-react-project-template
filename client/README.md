@@ -2,6 +2,9 @@
 
 - [React](#react)
   - [ESLint configuration](#eslint-configuration)
+    - [Install](#install)
+    - [Configure](#configure)
+    - [Add prettier](#add-prettier)
   - [Testing](#testing)
     - [Structure](#structure)
   - [Run the application](#run-the-application)
@@ -12,65 +15,97 @@
 
 ## ESLint configuration
 
-Install ESLinter:
+### Install
 
 ```shell
-npm install -g eslint
+npm install eslint --save-dev
 ```
 
-Configure ESLinter with Prettier
+### Configure
+
+```shell
+npm init @eslint/config
+```
+
+### Add prettier
 
 ```shell
 npm install eslint-config-prettier eslint-plugin-prettier prettier --save-dev
 ```
 
-ESLinter settings rules (`.eslintrc.json`)
+`.eslintrc.json`
 
 ```json
 {
-  "jsx-a11y/label-has-associated-control": [
-    "warn"
+  "root": true,
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended"
   ],
-  "max-len": [
-    "warn",
-    130
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true,
+    "node": false
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
   ],
-  "no-param-reassign": [
-    "error",
-    {
-      "props": true,
-      "ignorePropertyModificationsForRegex": [
-        "^draft"
-      ]
-    }
-  ],
-  "no-unused-vars": "warn",
-  "prettier/prettier": [
-    "error",
-    {
-      "endOfLine": "auto",
-      "singleQuote": true
-    }
-  ],
-  "quotes": [
-    "error",
-    "single"
-  ],
-  "react/prop-types": 0
+  "rules": {
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "singleQuote": true
+      }
+    ],
+    "max-len": [
+      "warn",
+      120
+    ],
+    "no-unused-vars": "warn",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsForRegex": [
+          "^draft"
+        ]
+      }
+    ],
+    "react/prop-types": 0,
+    "jsx-a11y/label-has-associated-control": [
+      "warn"
+    ]
+  }
 }
 ```
 
-Prettier settings (`.prettierrc.json`)
+> We specify `"root": true` as we want to keep the top level linter separate from the client one.
+
+`.prettierrc.json`
 
 ```json
 {
-  "arrowParens": "always",
-  "colon": false,
-  "endOfLine": "auto",
-  "semi": true,
   "singleQuote": true,
+  "trailingComma": "es5",
   "tabWidth": 2,
-  "trailingComma": "es5"
+  "semi": true,
+  "colon": false,
+  "arrowParens": "always",
+  "endOfLine": "auto"
 }
 ```
 
@@ -161,7 +196,7 @@ name: Client Linter
 
 on:
   push:
-    branches: [fake-branch]
+    branches: [your-branch]
     paths:
     - 'client/src/**'
   workflow_dispatch:
@@ -181,7 +216,7 @@ jobs:
       - name: Build
         run: CI= npm run build --prefix client/
       - name: Linter
-        run: npx eslint "client/src/**"
+        run: npm run lint --prefix client/
 ```
 
 ### Continuous Integration

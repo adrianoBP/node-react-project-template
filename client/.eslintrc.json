@@ -1,53 +1,55 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "jest": true
+  "root": true,
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true,
+    "node": false
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "plugin:prettier/recommended"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "quotes": [
+      "error",
+      "single"
     ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "singleQuote": true
+      }
     ],
-    "rules": {
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "prettier/prettier": [
-            "error",
-            {
-                "endOfLine": "auto",
-                "singleQuote": true
-            }
-        ],
-        "max-len": [
-            "warn",
-            130
-        ],
-        "no-unused-vars": "warn",
-        "no-param-reassign": [
-            "error",
-            {
-                "props": true,
-                "ignorePropertyModificationsForRegex": [
-                    "^draft"
-                ]
-            }
-        ],
-        "react/prop-types": 0,
-        "jsx-a11y/label-has-associated-control": [
-            "warn"
+    "max-len": [
+      "warn",
+      120
+    ],
+    "no-unused-vars": "warn",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsForRegex": [
+          "^draft"
         ]
-    }
+      }
+    ],
+    "react/prop-types": 0,
+    "jsx-a11y/label-has-associated-control": [
+      "warn"
+    ]
+  }
 }

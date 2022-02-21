@@ -10,6 +10,9 @@ Template project for React frontend application with NodeJS backend
   - [Client](#client)
   - [Server](#server)
     - [Linter](#linter)
+      - [Install](#install)
+      - [Configure](#configure)
+      - [Add prettier](#add-prettier)
     - [Required modules](#required-modules)
     - [Host static files](#host-static-files)
     - [Run server](#run-server)
@@ -18,6 +21,7 @@ Template project for React frontend application with NodeJS backend
       - [Disable Required authentication](#disable-required-authentication)
       - [Enable Service](#enable-service)
     - [Workflows](#workflows)
+      - [Lint](#lint)
       - [Deployment](#deployment)
 
 ## Repository
@@ -60,6 +64,7 @@ Rules:
 - Be descriptive and **concise**
 - Use present verbs
 - Between 20 and 80 characters
+- Small, many and precise commits
 
 Samples:
 
@@ -82,33 +87,60 @@ npx create-react-app client
 
 ### Linter
 
+#### Install
+
+```shell
+npm install eslint --save-dev
+```
+
+#### Configure
+
+```shell
+npm init @eslint/config
+```
+
+#### Add prettier
+
+```shell
+npm install eslint-config-prettier eslint-plugin-prettier prettier --save-dev
+```
+
 `.eslintrc.json`
 
 ```json
 {
+  "root": true,
+  "extends": [
+      "airbnb",
+      "prettier",
+      "plugin:prettier/recommended"
+  ],
   "env": {
-    "browser": true,
-    "es2021": true,
-    "jest": true
+      "browser": true,
+      "commonjs": true,
+      "es2021": true,
+      "node": true
   },
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
+      "ecmaVersion": "latest"
   },
-  "extends": [],
   "rules": {
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "max-len": [
-      "warn",
-      130
-    ],
-    "no-unused-vars": "warn"
+      "quotes": [
+          "error",
+          "single"
+      ],
+      "prettier/prettier": [
+          "error",
+          {
+              "endOfLine": "auto",
+              "singleQuote": true
+          }
+      ],
+      "max-len": [
+          "warn",
+          120
+      ],
+      "no-unused-vars": "warn"
   }
 }
 ```
@@ -124,13 +156,13 @@ build/
 
 ```json
 {
-  "printWidth": 130,
-  "tabWidth": 2,
   "singleQuote": true,
   "trailingComma": "es5",
-  "bracketSpacing": true,
-  "endOfLine": "auto",
-  "htmlWhitespaceSensitivity": "css"
+  "tabWidth": 2,
+  "semi": true,
+  "colon": false,
+  "arrowParens": "always",
+  "endOfLine": "auto"
 }
 ```
 
@@ -224,6 +256,34 @@ systemctl start service-name
 ```
 
 ### Workflows
+
+#### Lint
+
+```yml
+name: Server Linter
+
+on:
+  push:
+    branches: [your-branch]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+      - name: Setup Node
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: CI= npm run build
+      - name: Linter
+        run: npm run lint
+```
 
 #### Deployment
 
