@@ -7,8 +7,9 @@ Template project for React frontend application with NodeJS backend
     - [Folder Structure](#folder-structure)
     - [Branches](#branches)
     - [Commit Messages](#commit-messages)
-  - [Client](#client)
-  - [Server](#server)
+  - [Client (React)](#client-react)
+    - [React configuration](#react-configuration)
+  - [Server (Node)](#server-node)
     - [Linter](#linter)
       - [Install](#install)
       - [Configure](#configure)
@@ -23,6 +24,10 @@ Template project for React frontend application with NodeJS backend
     - [Workflows](#workflows)
       - [Lint](#lint)
       - [Deployment](#deployment)
+    - [SSL](#ssl)
+      - [Install Apache](#install-apache)
+      - [Install Certbot](#install-certbot)
+      - [Add domain SSL](#add-domain-ssl)
 
 ## Repository
 
@@ -72,7 +77,7 @@ Samples:
 - `feat(Controller): add testing controller endpoint`
 - `style(TodoItem): change button colour`
 
-## Client
+## Client (React)
 
 ```shell
 npx create-react-app client
@@ -81,9 +86,11 @@ npx create-react-app client
 - `npx` executes a file
 - `client` is the name of the folder to use (use `.` to use the current folder)
 
+### React configuration
+
 [Go To React configuration](./client/README.md)
 
-## Server
+## Server (Node)
 
 ### Linter
 
@@ -302,15 +309,33 @@ jobs:
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.4
         with:
-          host: t1.adrianobp.dev
-          username: adriano
+          host: host.name
+          username: username
           password: ${{ secrets.ssh_password }}
           port: 22
           script: |
-            cd /home/adriano/projects/node-react-project-template
-            systemctl stop node-react-template
+            cd /path/to/your/project
+            systemctl stop service-name
             git checkout master
             git pull
             npm run build --prefix client/
-            systemctl start node-react-template
+            systemctl start service-name
 ```
+
+### SSL
+
+#### Install Apache
+
+```shell
+sudo apt install apache2
+```
+
+#### Install Certbot
+
+```shell
+apt install certbot python3-certbot-apache
+```
+
+#### Add domain SSL
+
+[Link (private repo)](https://github.com/adrianoBP/docs/blob/master/Apache/SSL.md)

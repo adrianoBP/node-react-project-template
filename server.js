@@ -1,11 +1,15 @@
 // ! NodeJS unit testing
 // ! TLS
 
+// TODO: make API call to backend (CORS)
+// TODO: define PR structure including how to merge
 // TODO: local vs production environment + environment variables
 // TODO: do not merge if PR errors on workflow
 // TODO: actions for branch naming convention
 // TODO: action for commit messages
 // TODO: automatic documentation
+
+// TODO: MongoDB deployment + connection
 
 // ? Investigate commit message stiles
 // ? Investigate branch naming styles
@@ -13,6 +17,8 @@
 
 require('dotenv').config();
 const express = require('express');
+const fs = require('fs');
+const https = require('https');
 const bodyParser = require('body-parser');
 const path = require('path');
 const indexControllers = require('./controllers/index');
@@ -31,6 +37,11 @@ app.get('*', (_, res) => {
   res.sendFile(path.join(clientBuildPath, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/cert.pem'),
+};
+
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
 });
