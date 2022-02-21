@@ -37,11 +37,18 @@ app.get('*', (_, res) => {
   res.sendFile(path.join(clientBuildPath, 'index.html'));
 });
 
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/cert.pem'),
-};
+if (process.env?.IS_DEV) {
+  // * In development, don't load SSL certificates
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+  });
+} else {
+  const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/cert.pem'),
+  };
 
-https.createServer(options, app).listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+  https.createServer(options, app).listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+  });
+}
