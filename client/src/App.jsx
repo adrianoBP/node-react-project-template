@@ -60,7 +60,7 @@ function App() {
         Add New Todo
       </button>
       <button type="button" onClick={handleClearTodos}>
-        Clear Completed Todos
+        Clear Todos
       </button>
       <div>{todos.filter((todo) => !todo.complete).length} left todo</div>
     </>
