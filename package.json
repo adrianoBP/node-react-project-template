@@ -1,14 +1,15 @@
 {
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "lint": "npx eslint \"**/*.js\""
   },
   "dependencies": {
     "body-parser": "^1.19.2",
     "dotenv": "^16.0.0",
     "eslint-config-airbnb": "^19.0.4",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "supertest": "^6.2.2"
   },
   "devDependencies": {
     "eslint": "^8.9.0",
@@ -17,5 +18,10 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.1"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "client"
+    ]
   }
 }

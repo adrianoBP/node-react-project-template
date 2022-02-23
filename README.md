@@ -84,6 +84,7 @@ Rules:
 
 - Do **not** use pronouns and verbs such as "I have edited [...]"
 - Do **not** use swear words
+- Use present tense
 - Be descriptive and **concise**
 - Use present verbs
 - Between 20 and 80 characters
