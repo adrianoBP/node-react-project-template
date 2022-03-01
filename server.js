@@ -1,8 +1,4 @@
-// ! NodeJS unit testing
-
 // TODO: make API call to backend (CORS)
-// TODO: define PR structure including how to merge
-// TODO: local vs production environment + environment variables
 // TODO: do not merge if PR errors on workflow
 // TODO: actions for branch naming convention
 // TODO: action for commit messages
@@ -10,6 +6,9 @@
 // TODO: SSL keys path in .env
 
 // TODO: MongoDB deployment + connection
+
+// ? Mock DB for tests: https://www.youtube.com/watch?v=IDjF6-s1hGk
+// ? Dependency Injection: https://www.youtube.com/watch?v=yOC0e0NMZ-E
 
 // ? Investigate commit message stiles
 // ? Investigate branch naming styles
