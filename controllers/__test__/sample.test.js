@@ -1,5 +1,7 @@
-const request = require('supertest');
-const app = require('../../app');
+import request from 'supertest';
+import startServer from '../../app.js';
+
+const app = startServer();
 
 describe('POST /user', () => {
   describe('given username and password', () => {

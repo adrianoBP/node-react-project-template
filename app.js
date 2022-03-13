@@ -1,17 +1,17 @@
-const express = require('express');
+import express from 'express';
+import router from './controllers/index.js';
 
-const app = express();
-const bodyParser = require('body-parser');
-const path = require('path');
-const controllersIndex = require('./controllers/index');
+export default function startServer(clientFolder, isProd) {
+  const app = express();
+  app.use(express.json());
+  app.use('/api', router);
 
-app.use(bodyParser.json({ extended: false }));
-app.use('/api', controllersIndex);
+  // We must check for string value as .env should only contain strings
+  if (isProd) {
+    // Host client build as static files
+    if (clientFolder) app.use(express.static(clientFolder));
+    // TODO: add SSL certificates
+  }
 
-const clientBuildPath = path.join(__dirname, './client/build');
-app.use(express.static(clientBuildPath));
-app.get('*', (_, res) => {
-  res.sendFile(path.join(clientBuildPath, 'index.html'));
-});
-
-module.exports = app;
+  return app;
+}

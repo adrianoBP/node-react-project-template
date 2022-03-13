@@ -50,6 +50,7 @@ Template project for React frontend application with NodeJS backend
 │── .eslintrc.json
 │── .eslintignore
 │── .prettierrc.json
+├── .env
 ├── package-lock.json
 ├── package.json
 ├── server.js
@@ -61,8 +62,8 @@ Template project for React frontend application with NodeJS backend
 
 #### Naming
 
-- `feat/be-33`: feature branch for backend card number 33
-- `fix/fe-12`: fix branch for frontend card 12
+- `feat/be-33-game-board`: feature branch for backend card number 33, adds a new feature for the "game board"
+- `fix/fe-12-game-progress`: fix branch for frontend card 12, fixes the game progress
 
 #### Branch structure
 
@@ -125,6 +126,18 @@ npm install eslint --save-dev
 npm init @eslint/config
 ```
 
+### Testing
+
+Backend testing can done with [Jest](https://jestjs.io/) and [SuperTest](https://www.npmjs.com/package/supertest)
+
+> Note: to enable ESM modules, Node needs to run in experimental mode
+
+#### Run testing
+
+`node --experimental-vm-modules node_modules/jest/bin/jest.js`
+
+> NB: Jest must be installed as a dependency (dev dependency)
+
 #### Add prettier
 
 ```shell
@@ -137,36 +150,38 @@ npm install eslint-config-prettier eslint-plugin-prettier prettier --save-dev
 {
   "root": true,
   "extends": [
-      "airbnb",
-      "prettier",
-      "plugin:prettier/recommended"
+    "airbnb",
+    "prettier",
+    "plugin:prettier/recommended"
   ],
   "env": {
-      "browser": true,
-      "commonjs": true,
-      "es2021": true,
-      "node": true
+    "node": true,
+    "es6": true,
+    "browser": true
   },
   "parserOptions": {
-      "ecmaVersion": "latest"
+    "ecmaVersion": "latest"
   },
   "rules": {
-      "quotes": [
-          "error",
-          "single"
-      ],
-      "prettier/prettier": [
-          "error",
-          {
-              "endOfLine": "auto",
-              "singleQuote": true
-          }
-      ],
-      "max-len": [
-          "warn",
-          120
-      ],
-      "no-unused-vars": "warn"
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "import/extensions": [
+      "never"
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "singleQuote": true
+      }
+    ],
+    "max-len": [
+      "warn",
+      120
+    ],
+    "no-unused-vars": "warn"
   }
 }
 ```

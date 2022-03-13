@@ -1,4 +1,4 @@
-const { Router } = require('express');
+import { Router } from 'express';
 
 const router = new Router();
 
@@ -28,4 +28,4 @@ router.get('/hello-world', getHelloWorld);
 router.get('/get-user', getUser);
 router.post('/show-user', showUser);
 
-module.exports = router;
+export default router;

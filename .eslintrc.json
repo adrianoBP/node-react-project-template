@@ -6,11 +6,9 @@
         "plugin:prettier/recommended"
     ],
     "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true,
         "node": true,
-        "jest": true
+        "es6": true,
+        "browser": true
     },
     "parserOptions": {
         "ecmaVersion": "latest"
@@ -19,6 +17,9 @@
         "quotes": [
             "error",
             "single"
+        ],
+        "import/extensions": [
+            "never"
         ],
         "prettier/prettier": [
             "error",

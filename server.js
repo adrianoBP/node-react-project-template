@@ -14,15 +14,20 @@
 // ? Investigate branch naming styles
 // ? Investigate React routes
 
-require('dotenv').config();
-const fs = require('fs');
-const https = require('https');
-const app = require('./app');
+import dotenv from 'dotenv';
+import startServer from './app.js';
+import fs from 'fs';
+import https from 'https';
 
-const PORT = process.env.PORT || 4000;
+dotenv.config();
 
-if (process.env?.IS_PROD === 'true') {
-  // * If production, load SSL certificates
+const PORT = process.env.PORT || 5000;
+const IS_PROD = process.env.IS_PROD === 'true';
+const CLIENT_FOLDER = new URL('client/build', import.meta.url).pathname;
+
+const app = startServer(CLIENT_FOLDER, IS_PROD);
+
+if (IS_PROD) {
   const options = {
     key: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/cert.pem'),
