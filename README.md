@@ -16,6 +16,8 @@ Template project for React frontend application with NodeJS backend
       - [Install](#install)
       - [Configure](#configure)
       - [Add prettier](#add-prettier)
+    - [Testing](#testing)
+      - [Run testing](#run-testing)
     - [Required modules](#required-modules)
     - [Host static files](#host-static-files)
     - [Run server](#run-server)

@@ -3,7 +3,6 @@
 // TODO: actions for branch naming convention
 // TODO: action for commit messages
 // TODO: automatic documentation
-// TODO: SSL keys path in .env
 
 // TODO: MongoDB deployment + connection
 
@@ -27,10 +26,10 @@ const CLIENT_FOLDER = new URL('client/build', import.meta.url).pathname;
 
 const app = startServer(CLIENT_FOLDER, IS_PROD);
 
-if (IS_PROD) {
+if (IS_PROD && process.env.SSL_KEY_PATH && process.env.SSL_CERT_PATH) {
   const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/t1.adrianobp.dev/cert.pem'),
+    key: fs.readFileSync(process.env.SSL_KEY_PATH),
+    cert: fs.readFileSync(process.env.SSL_CERT_PATH),
   };
 
   https.createServer(options, app).listen(PORT, () => {
