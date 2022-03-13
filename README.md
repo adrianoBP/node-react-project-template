@@ -136,7 +136,9 @@ Backend testing can done with [Jest](https://jestjs.io/) and [SuperTest](https:/
 
 #### Run testing
 
-`node --experimental-vm-modules node_modules/jest/bin/jest.js`
+```shell
+node --experimental-vm-modules node_modules/jest/bin/jest.js
+```
 
 > NB: Jest must be installed as a dependency (dev dependency)
 
