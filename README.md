@@ -279,7 +279,7 @@ WantedBy=multi-user.target
 
 1. Edit `/usr/share/polkit-1/actions/org.freedesktop.systemd1.policy`
 2. Set `org.freedesktop.systemd1.manage-units` > `allow_any` to `yes`
-3. Set `org.freedesktop.systemd1.manage-units-files` > `allow_any` to `yes`
+3. Set `org.freedesktop.systemd1.manage-unit-files` > `allow_any` to `yes`
 4. Set `org.freedesktop.systemd1.reload-daemon` > `allow_any` to `yes`
 
 ```shell
