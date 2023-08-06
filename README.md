@@ -286,6 +286,18 @@ WantedBy=multi-user.target
 sudo systemctl restart polkit
 ```
 
+#### Make npm available to all users
+
+> NOTE! This action should only be performed if, when starting the service, a 203 exit message is returned.
+
+```sh
+n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local
+```
+
+```sh
+n=$(which npm);n=${n%/bin/npm}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local
+```
+
 #### Enable Service
 
 ```shell
